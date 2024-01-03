@@ -1,25 +1,29 @@
 .file {
-  width: 100px;
+  width: 150px;
   height: auto;
+  margin-top: 10px;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 10px;
 
   &__icon {
-    width: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    width: max-content;
     height: max-content;
 
     svg {
-      width: 100px;
+      width: 25px;
       height: inherit;
     }
 
     p {
-      margin-bottom: 10px;
-
       font-size: 14px;
       font-weight: 600;
+      line-height: 14px;
       text-align: center;
     }
   }
@@ -28,17 +32,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    background-color: rgb(164, 164, 164);
+
+    width: 15px;
+
+    background-color: transparent;
+    border: none;
+
     transition: background-color .3s ease, transform .2s ease-in-out;
 
     svg {
       height: 20px;
       width: inherit;
+
+      transform: rotate(180deg);
+      transition: transform .3s ease;
+
+      path {
+        fill: rgb(76, 75, 75);
+        transition: fill .3s ease;
+      }
     }
 
     &:hover:enabled {
-      background-color: rgb(131, 131, 131);
+      svg {
+        path {
+          fill: black;
+        }
+      }
+  
     }
 
     &:active:enabled {
@@ -52,6 +73,12 @@
         }
       }
     }
+
+    &_active {
+      svg {
+        transform: rotate(0);
+      }
+    }
   }
 
   &__activeBranch {
@@ -61,4 +88,12 @@
       }
     }
   }
+
+  &__buttonMock {
+    width: 15px;
+  }
+}
+
+.nestedFiles {
+  margin-left: 25px;
 }

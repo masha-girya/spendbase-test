@@ -3,7 +3,7 @@ export enum FolderType {
   file = "file",
 }
 
-export type TNestedItems = string[]; // an array of IDs of connected folders/files
+export type TNestedItems = IFolder[]; // an array of IDs of connected folders/files
 
 export interface IFolder {
   id: string;
