@@ -1,0 +1,64 @@
+.file {
+  width: 100px;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__icon {
+    width: inherit;
+    height: max-content;
+
+    svg {
+      width: 100px;
+      height: inherit;
+    }
+
+    p {
+      margin-bottom: 10px;
+
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
+  &__openButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: rgb(164, 164, 164);
+    transition: background-color .3s ease, transform .2s ease-in-out;
+
+    svg {
+      height: 20px;
+      width: inherit;
+    }
+
+    &:hover:enabled {
+      background-color: rgb(131, 131, 131);
+    }
+
+    &:active:enabled {
+      transform: scale(.9);
+    }
+
+    &:disabled {
+      svg {
+        path {
+          fill: rgb(72, 71, 71);
+        }
+      }
+    }
+  }
+
+  &__activeBranch {
+    svg {
+      path {
+        fill: greenyellow;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.folder {
+  width: inherit;
+  height: inherit;
+  max-height: inherit;
+
+  display: flex;
+
+  &__openButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: rgb(164, 164, 164);
+    transition: background-color .3s ease, transform .2s ease-in-out;
+
+    svg {
+      height: 20px;
+      width: inherit;
+    }
+
+    &:hover:enabled {
+      background-color: rgb(131, 131, 131);
+    }
+
+    &:active:enabled {
+      transform: scale(.9);
+    }
+
+    &:disabled {
+      svg {
+        path {
+          fill: rgb(72, 71, 71);
+        }
+      }
+    }
+  }
+}
