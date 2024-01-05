@@ -1,0 +1,28 @@
+.folder {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  width: max-content;
+  height: max-content;
+
+  svg {
+    width: 25px;
+    height: inherit;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    text-align: center;
+  }
+
+  &__directory {
+    width: inherit;
+    height: inherit;
+    max-height: inherit;
+
+    display: flex;
+  }
+}

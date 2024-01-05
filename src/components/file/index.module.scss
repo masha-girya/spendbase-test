@@ -1,0 +1,39 @@
+.file {
+  width: max-content;
+  height: auto;
+  margin-top: 10px;
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background-color: transparent;
+  border: none;
+
+  transition: background-color .3s ease;
+
+  cursor: pointer;
+
+  &_active {
+    background-color: rgb(183, 182, 181);
+  }
+
+  &_empty {
+    opacity: .6;
+  }
+
+  &:disabled {
+    opacity: .7;
+
+    cursor: not-allowed;
+  }
+
+  &__buttonMock {
+    width: 15px;
+  }
+}
+
+.nestedFiles {
+  margin-left: 25px;
+}
