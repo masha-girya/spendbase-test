@@ -1,20 +1,28 @@
-import { FolderEmptyIcon, FolderFullIcon } from "../icons";
-import { TNestedItems } from "src/types";
+import { FileIcon, FolderEmptyIcon, FolderFullIcon } from "../icons";
+import { FolderType, TNestedItems } from "src/types";
 import styles from "./index.module.scss";
 
 interface IProps {
   folderNestedItems: TNestedItems | undefined;
+  name: string;
+  type: FolderType;
 }
 
 export const Folder = (props: IProps) => {
-  const { folderNestedItems } = props;
+  const { folderNestedItems, type, name } = props;
 
   return (
     <div className={styles.folder}>
-      {folderNestedItems && folderNestedItems.length > 0
-        ? <FolderFullIcon />
-        : <FolderEmptyIcon />
-      }
+      {type === FolderType.file && <FileIcon />}
+      {type === FolderType.folder && (
+        <div className={styles.folder__directory}>
+          {folderNestedItems && folderNestedItems.length > 0
+            ? <FolderFullIcon />
+            : <FolderEmptyIcon />
+          }
+        </div>
+      )}
+      <p>{name}</p>
     </div>
-  )
-}
+  );
+};

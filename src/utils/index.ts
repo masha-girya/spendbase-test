@@ -1,2 +1,2 @@
-export * from "./api";
+export * from "./api-helper";
 export * from "./api-reference";

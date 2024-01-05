@@ -1,8 +1,9 @@
-import { FolderType, TNestedItems } from "src/types";
+import { AccessType, FolderType, IFolder } from "src/types";
 
 interface IApiReference {
   id: string;
   name: string;
-  type: FolderType;
-  nestedItems?: TNestedItems;
+  type: FolderType,
+  parent: null | IFolder,
+  access: AccessType,
 }

@@ -3,11 +3,21 @@ export enum FolderType {
   file = "file",
 }
 
-export type TNestedItems = IFolder[]; // an array of IDs of connected folders/files
+export enum AccessType {
+  admin = "admin",
+  user = "user",
+}
+
+export type TNestedItems = IFolder[];
 
 export interface IFolder {
   id: string;
   name: string;
   type: FolderType,
-  nestedItems?: TNestedItems;
+  parent: null | IFolder,
+  access: AccessType,
+}
+
+export interface IFolderClient extends IFolder {
+  nestedItems: IFolderClient[],
 }

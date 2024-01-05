@@ -1,54 +1,77 @@
+import { useState } from "react";
 import classNames from "classnames";
-import { ArrowDownIcon, FileIcon } from "../icons";
-import { Folder } from "../folder";
-import { FolderType, IFolder } from "src/types";
+import { Folder, ArrowButton } from "src/components";
+import { AccessType, FolderType, IFolderClient } from "src/types";
 import styles from "./index.module.scss";
-import { useEffect, useState } from "react";
 
 interface IProps {
-  info: IFolder;
+  info: IFolderClient;
+  activeFolderId: string;
+  setActiveFolderId: (activeFolderId: string) => void;
+  searchQuery: string;
+  openFolderIds: string[];
+  setOpenFolderIds: React.Dispatch<React.SetStateAction<string[]>>;
   children?: React.ReactNode;
 }
 
 export const File = (props: IProps) => {
-  const { info, children } = props;
-  const { type, name, nestedItems } = info;
-  const [isOpenedFolder, setIsOpenedFolder] = useState(false);
+  const {
+    info,
+    activeFolderId,
+    setActiveFolderId,
+    setOpenFolderIds,
+    openFolderIds,
+    children,
+  } = props;
+  const { id, type, name, nestedItems, parent, access } = info;
+  const [prevActiveFolderId, setPrevActiveFolderId] = useState("");
 
-  const isToShowButton =
-    type === "folder" && nestedItems && nestedItems.length > 0;
+  const folderWithChildren = type === FolderType.folder && nestedItems.length > 0;
+
+  console.log({name, nestedItems: folderWithChildren})
+
+  const isForbiddenToOpen =
+    access === AccessType.admin || parent?.access === AccessType.admin;
 
   const handleClick = () => {
-    setIsOpenedFolder(!isOpenedFolder);
+    if (isForbiddenToOpen) {
+      return;
+    }
+
+    if (openFolderIds.includes(id)) {
+      setOpenFolderIds((prev) => prev.filter((prevIds) => prevIds !== id));
+      setActiveFolderId(prevActiveFolderId);
+    } else {
+      setOpenFolderIds((prev) => [...prev, id]);
+      setPrevActiveFolderId(activeFolderId);
+      setActiveFolderId(id);
+    }
   };
 
   return (
-    <div className={styles.fileStructure}>
-      <div
-        className={styles.file}
+    <>
+      <button
+        type="button"
+        aria-label="Open folder"
+        data-testid={name}
+        onClick={handleClick}
+        disabled={isForbiddenToOpen}
+        className={classNames(styles.file, {
+          [styles.file_active]: activeFolderId === id,
+          [styles.file_empty]: !folderWithChildren && type !== FolderType.file,
+        })}
       >
-        {isToShowButton && (
-          <button
-            onClick={handleClick}
-            type="button"
-            disabled={nestedItems === undefined || nestedItems.length === 0}
-            className={classNames(styles.file__openButton, {
-              [styles.file__openButton_active]: isOpenedFolder,
-            })}
-          >
-            <ArrowDownIcon />
-          </button>
+
+        {folderWithChildren && (
+          <ArrowButton isOpenedFolder={openFolderIds.includes(id)} />
         )}
-        {/* {type === FolderType.file && <div className={styles.file__buttonMock}></div>} */}
-        <div className={styles.file__icon}>
-          {type === FolderType.file && <FileIcon />}
-          {type === FolderType.folder && (
-            <Folder folderNestedItems={nestedItems} />
-          )}
-          <p>{name}</p>
-        </div>
-      </div>
-      {isOpenedFolder && <div className={styles.nestedFiles}>{children}</div>}
-    </div>
+
+        <Folder folderNestedItems={nestedItems} type={type} name={name} />
+      </button>
+
+      {openFolderIds.includes(id) && (
+        <div className={styles.nestedFiles}>{children}</div>
+      )}
+    </>
   );
 };

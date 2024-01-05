@@ -1,92 +1,32 @@
 .file {
-  width: 150px;
+  width: max-content;
   height: auto;
   margin-top: 10px;
+  padding: 0 10px;
 
   display: flex;
   align-items: center;
   gap: 10px;
 
-  &__icon {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  background-color: transparent;
+  border: none;
 
-    width: max-content;
-    height: max-content;
+  transition: background-color .3s ease;
 
-    svg {
-      width: 25px;
-      height: inherit;
-    }
+  cursor: pointer;
 
-    p {
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 14px;
-      text-align: center;
-    }
+  &_active {
+    background-color: rgb(183, 182, 181);
   }
 
-  &__openButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 15px;
-
-    background-color: transparent;
-    border: none;
-
-    transition: background-color .3s ease, transform .2s ease-in-out;
-
-    svg {
-      height: 20px;
-      width: inherit;
-
-      transform: rotate(180deg);
-      transition: transform .3s ease;
-
-      path {
-        fill: rgb(76, 75, 75);
-        transition: fill .3s ease;
-      }
-    }
-
-    &:hover:enabled {
-      svg {
-        path {
-          fill: black;
-        }
-      }
-  
-    }
-
-    &:active:enabled {
-      transform: scale(.9);
-    }
-
-    &:disabled {
-      svg {
-        path {
-          fill: rgb(72, 71, 71);
-        }
-      }
-    }
-
-    &_active {
-      svg {
-        transform: rotate(0);
-      }
-    }
+  &_empty {
+    opacity: .6;
   }
 
-  &__activeBranch {
-    svg {
-      path {
-        fill: greenyellow;
-      }
-    }
+  &:disabled {
+    opacity: .7;
+
+    cursor: not-allowed;
   }
 
   &__buttonMock {

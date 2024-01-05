@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { PLACEHOLDER } from "src/constants";
 import styles from "./index.module.scss";
 
 interface IProps {
@@ -20,6 +21,7 @@ export const Search = (props: IProps) => {
     <input
       className={styles.search}
       type="text"
+      placeholder={PLACEHOLDER}
       value={searchQuery}
       onChange={handleChange}
     />
