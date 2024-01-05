@@ -1,4 +1,4 @@
-Spendbase test
+**Spendbase test**
 
 Tasks completed: 1-6
 
